@@ -1,0 +1,12 @@
+.table-row {
+  align-content: center;
+}
+
+.table-row:hover {
+  background-color: #f8f8f8;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
