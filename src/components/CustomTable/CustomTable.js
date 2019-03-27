@@ -28,7 +28,7 @@ export class CustomTable extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('http://localhost:3001/user')
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN}/user`)
     const data = await response.json()
     const transformedData = data.map(row => createData(...Object.values(row)))
     this.setState({ data: transformedData, isLoading: false })

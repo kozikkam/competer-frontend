@@ -15,7 +15,7 @@ export class Matches extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch(`http://localhost:3001/user/${this.number}`)
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN}/user/${this.number}`)
     const data = await response.json()
     this.setState({ data, isLoading: false })
   }

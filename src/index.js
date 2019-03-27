@@ -6,6 +6,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 import './index.css'
 
+require('dotenv').config()
+
 ReactDOM.render((
   <BrowserRouter>
     <App />

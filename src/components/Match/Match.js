@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Grid from '@material-ui/core/Grid';
 
-import { Info } from './../Info'
 import { Team } from './Team'
 
 import './Match.css'
