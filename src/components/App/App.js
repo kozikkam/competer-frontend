@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import CssBaseline from '@material-ui/core/CssBaseline'
 
 import { Main } from './../Main'
 import { Header } from './../Header'
@@ -15,6 +16,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
+        <CssBaseline />
         <Header />
         <Main />
       </div>

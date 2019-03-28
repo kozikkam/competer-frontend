@@ -1,0 +1,25 @@
+.success {
+  background-color: green !important;
+}
+
+.error {
+  background-color: #c64031 !important;
+}
+
+.icon {
+  font-size: 20 !important;
+}
+
+.iconVariant {
+  opacity: 0.9 !important;
+  margin-right: 10px !important;
+}
+
+.message {
+  display: 'flex' !important;
+  align-items: 'center' !important;
+}
+
+.margin {
+  margin: 10px !important;
+}
