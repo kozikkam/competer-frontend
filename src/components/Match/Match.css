@@ -5,3 +5,7 @@
   font-size: 4em;
   flex-direction: column;
 }
+
+.single-match {
+  margin-bottom: 40px;
+}

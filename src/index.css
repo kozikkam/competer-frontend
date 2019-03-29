@@ -10,3 +10,7 @@ p {
 a {
   color: #000000;
 }
+
+.root {
+  height: 100% !important;
+}

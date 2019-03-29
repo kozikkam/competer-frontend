@@ -39,7 +39,7 @@ export class Matches extends Component {
 
     return (
       <div className="matches">
-        <Grid container spacing={40}>
+        <Grid container>
           <Grid item xs={1} />
           <Grid item xs={10}>
             <Info attributes={{firstName: data.firstName, lastName: data.lastName, elo: data.elo}}/>

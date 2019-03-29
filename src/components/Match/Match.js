@@ -30,7 +30,7 @@ export class Match extends Component {
     return (
       <div className="single-match">
         <div className="teams">
-          <Grid container spacing={40}>
+          <Grid container>
             <Grid item xs={1} />
             <Grid item xs={4}>
               <Team players={this.getWinners(data)} />
