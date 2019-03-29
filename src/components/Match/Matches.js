@@ -15,7 +15,14 @@ export class Matches extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN}/user/${this.number}`)
+    const jwt = sessionStorage.getItem('jwtToken')
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_DOMAIN}/user/${this.number}`, {
+        headers: {
+          'Authorization': `Bearer ${jwt}`,
+        },
+      }
+    )
     const data = await response.json()
     this.setState({ data, isLoading: false })
   }

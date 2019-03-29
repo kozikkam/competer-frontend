@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
@@ -7,11 +9,12 @@ import Input from '@material-ui/core/Input'
 import InputLabel from '@material-ui/core/InputLabel'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+
 import { Snackbar } from './../Snackbar'
 
 import './Login.css'
 
-export class Login extends Component {
+class LoginComponent extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -31,24 +34,17 @@ export class Login extends Component {
   async onSubmit(event) {
     event.preventDefault()
     let response
+    let body
 
     try {
       response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN}/login`, {
         method: 'POST',
-        body: JSON.stringify(this.state),
+        body: JSON.stringify({ email: this.state.email, password: this.state.password }),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         }
       })
-    } catch (err) {
-      this.setState({
-        error: 'Error logging in. Please try again.',
-      })
-    }
-
-    let body
-    try {
       body = await response.json()
     } catch (err) {
       this.setState({
@@ -58,6 +54,7 @@ export class Login extends Component {
 
     if (response.status === 200) {
       sessionStorage.setItem('jwtToken', body.token)
+      this.props.dispatch({ type: 'addJWT', payload: body.token })
     } else {
       this.setState({
         error: 'Error logging in. Please try again.',
@@ -120,3 +117,5 @@ export class Login extends Component {
     )
   }
 }
+
+export const Login = connect()(LoginComponent)

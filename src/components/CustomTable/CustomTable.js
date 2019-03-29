@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -17,7 +18,7 @@ function createData(userId, firstName, lastName, elo, matchCount, winCount, winP
   return { id, userId, firstName, lastName, elo, matchCount, winCount, winPercentage }
 }
 
-export class CustomTable extends Component {
+class CustomTableComponent extends Component {
   constructor(props) {
     super(props)
 
@@ -28,7 +29,14 @@ export class CustomTable extends Component {
   }
 
   async componentDidMount() {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN}/user`)
+    const jwt = sessionStorage.getItem('jwtToken')
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_DOMAIN}/user`, {
+        headers: {
+          'Authorization': `Bearer ${jwt}`,
+        },
+      }
+    )
     const data = await response.json()
     const transformedData = data.map(row => createData(...Object.values(row)))
     this.setState({ data: transformedData, isLoading: false })
@@ -82,3 +90,10 @@ export class CustomTable extends Component {
     )
   }
 }
+
+const mapStateToProps = (state, ownProps) => ({
+  ...ownProps,
+  jwt: state.jwt,
+})
+
+export const CustomTable = connect(mapStateToProps)(CustomTableComponent)
