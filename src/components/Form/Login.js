@@ -21,6 +21,7 @@ class LoginComponent extends Component {
       email : '',
       password: '',
       error: null,
+      redirect: false,
     }
   }
 
@@ -55,6 +56,7 @@ class LoginComponent extends Component {
     if (response.status === 200) {
       sessionStorage.setItem('jwtToken', body.token)
       this.props.dispatch({ type: 'addJWT', payload: body.token })
+      this.setState({ redirect: true })
     } else {
       this.setState({
         error: 'Error logging in. Please try again.',
@@ -82,6 +84,10 @@ class LoginComponent extends Component {
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />
+    }
+
     return (
       <div className="main">
         <Paper className="paper">

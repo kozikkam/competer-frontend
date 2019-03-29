@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid'
 
 import { Team } from './Team'
 
@@ -16,16 +16,16 @@ export class Match extends Component {
   }
 
   getWinners(data) {
-    return data.match.participants.filter(participant => participant.winner);
+    return data.match.participants.filter(participant => participant.winner)
   }
 
   getLosers(data) {
-    return data.match.participants.filter(participant => !participant.winner);
+    return data.match.participants.filter(participant => !participant.winner)
   }
 
   render() {
     const { data } = this.props
-    const formattedDate = (data.match.date.split('T'))[0];
+    const formattedDate = (data.match.date.split('T'))[0]
 
     return (
       <div className="single-match">

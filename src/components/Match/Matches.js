@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import Grid from '@material-ui/core/Grid'
+
 import { Match } from './Match'
 import { Info } from './../Info'
 
@@ -37,7 +39,13 @@ export class Matches extends Component {
 
     return (
       <div className="matches">
-        <Info attributes={{firstName: data.firstName, lastName: data.lastName, elo: data.elo}}/>
+        <Grid container spacing={40}>
+          <Grid item xs={1} />
+          <Grid item xs={10}>
+            <Info attributes={{firstName: data.firstName, lastName: data.lastName, elo: data.elo}}/>
+          </Grid>
+          <Grid item xs={1} />
+        </Grid>
         {data.participants.map((participant, i) => {
           return <Match key={i} data={participant} />
         })}

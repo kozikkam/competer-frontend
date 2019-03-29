@@ -20,6 +20,6 @@ export class App extends Component {
         <Header />
         <Main />
       </div>
-    );
+    )
   }
 }

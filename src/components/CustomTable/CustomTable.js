@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Table from '@material-ui/core/Table'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
+import Table from '@material-ui/core/Table'
 import Paper from '@material-ui/core/Paper'
-import CircularProgress from '@material-ui/core/CircularProgress'
+import Grid from '@material-ui/core/Grid'
 
 import './CustomTable.css'
 
@@ -46,47 +47,59 @@ class CustomTableComponent extends Component {
     const { data, isLoading } = this.state
     if (isLoading) {
       return (
-        <Paper className="table">
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell align="center"><CircularProgress color="secondary" /></TableCell>
-            </TableRow>
-          </TableHead>
-        </Table>
-      </Paper>
+        <Grid container spacing={40}>
+          <Grid item xs={1} />
+          <Grid item xs={10}>
+            <Paper className="table">
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="center"><CircularProgress color="secondary" /></TableCell>
+                  </TableRow>
+                </TableHead>
+              </Table>
+            </Paper>
+          </Grid>
+          <Grid item xs={1} />
+        </Grid>
       )
     }
 
     return (
-      <Paper className="table">
-        <Table>
-          <TableHead>
-            <TableRow className="table-row">
-              <TableCell align="right">Place</TableCell>
-              <TableCell>First Name</TableCell>
-              <TableCell>Last Name</TableCell>
-              <TableCell align="right">Elo</TableCell>
-              <TableCell align="right">Match Count</TableCell>
-              <TableCell align="right">Win Percentage</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map(row => {
-              return (
-                <TableRow key={row.id} className="table-row" component="a" href={`/user/${row.userId}`}>
-                <TableCell component="th" scope="row" align="right">{row.id}</TableCell>
-                  <TableCell>{row.firstName}</TableCell>
-                  <TableCell>{row.lastName}</TableCell>
-                  <TableCell align="right">{row.elo}</TableCell>
-                  <TableCell align="right">{row.matchCount}</TableCell>
-                  <TableCell align="right">{row.winPercentage}%</TableCell>
+      <Grid container>
+        <Grid item xs={1} />
+        <Grid item xs={10}>
+          <Paper className="table">
+            <Table>
+              <TableHead>
+                <TableRow className="table-row">
+                  <TableCell align="right">Place</TableCell>
+                  <TableCell>First Name</TableCell>
+                  <TableCell>Last Name</TableCell>
+                  <TableCell align="right">Elo</TableCell>
+                  <TableCell align="right">Match Count</TableCell>
+                  <TableCell align="right">Win Percentage</TableCell>
                 </TableRow>
-              )
-            })}
-          </TableBody>
-        </Table>
-      </Paper>
+              </TableHead>
+              <TableBody>
+                {data.map(row => {
+                  return (
+                    <TableRow key={row.id} className="table-row" component="a" href={`/user/${row.userId}`}>
+                    <TableCell component="th" scope="row" align="right">{row.id}</TableCell>
+                    <TableCell>{row.firstName}</TableCell>
+                    <TableCell>{row.lastName}</TableCell>
+                    <TableCell align="right">{row.elo}</TableCell>
+                    <TableCell align="right">{row.matchCount}</TableCell>
+                    <TableCell align="right">{row.winPercentage}%</TableCell>
+                    </TableRow>
+                  )
+                })}
+              </TableBody>
+            </Table>
+          </Paper>
+        </Grid>
+        <Grid item xs={1} />
+      </Grid>
     )
   }
 }

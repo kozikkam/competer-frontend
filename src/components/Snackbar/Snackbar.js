@@ -10,7 +10,7 @@ import './Snackbar.css'
 const variantIcon = {
   success: CheckCircleIcon,
   error: ErrorIcon,
-};
+}
 
 export class Snackbar extends Component {
   render() {
@@ -39,6 +39,6 @@ export class Snackbar extends Component {
         ]}
         {...other}
       />
-    );
+    )
   }
 }

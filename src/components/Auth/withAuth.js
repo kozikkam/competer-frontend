@@ -14,7 +14,6 @@ export function withAuth(ComponentToProtect) {
 
     async componentDidMount() {
       const jwt = sessionStorage.getItem('jwtToken')
-      console.log(jwt)
       let response
       try {
         response = await fetch(
