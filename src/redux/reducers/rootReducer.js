@@ -6,6 +6,6 @@ export default (state, action) => {
         jwt: action.payload,
       };
     default:
-      return state;
+      return state
   }
 };
