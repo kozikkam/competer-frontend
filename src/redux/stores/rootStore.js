@@ -1,8 +1,12 @@
-import { createStore } from "redux"
-import rootReducer from "./../reducers/rootReducer"
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './../reducers/rootReducer'
+import thunk from "redux-thunk"
 
-function configureStore(state = { jwt: null }) {
-  return createStore(rootReducer, state)
+function configureStore(state = {
+  loading: false,
+  valid: false,
+}) {
+  return createStore(rootReducer, state, applyMiddleware(thunk))
 }
 
 export default configureStore

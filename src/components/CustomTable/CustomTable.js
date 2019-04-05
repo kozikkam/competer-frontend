@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import Paper from '@material-ui/core/Paper'
-import Grid from '@material-ui/core/Grid'
 
 import './CustomTable.css'
 

@@ -1,47 +1,21 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
+
+import { checkJWT } from './../../redux/actions/jwt'
 
 export function withAuth(ComponentToProtect) {
-  return class Auth extends Component {
-    constructor() {
-      super()
-
-      this.state = {
-        loading: true,
-        redirect: false,
-      }
+  class Auth extends Component {
+    componentDidMount() {
+      this.props.dispatch(checkJWT())
     }
-
-    async componentDidMount() {
-      const jwt = sessionStorage.getItem('jwtToken')
-      let response
-      try {
-        response = await fetch(
-          `${process.env.REACT_APP_BACKEND_DOMAIN}/check-jwt`, {
-            method: "POST",
-            headers: {
-              'Authorization': `Bearer ${jwt}`,
-            },
-          }
-        )
-      } catch (err) {
-        this.setState({ loading: false, redirect: true })
-      }
-
-      if (response.status === 200) {
-        this.setState({ loading: false })
-      } else {
-        this.setState({ loading: false, redirect: true })
-      }
-    }
-
 
     render() {
-      const { loading, redirect } = this.state
+      const { loading, valid } = this.props
       if (loading) {
         return null
       }
-      if (redirect) {
+      if (!valid) {
         return <Redirect to="/login" />
       }
       return (
@@ -51,4 +25,12 @@ export function withAuth(ComponentToProtect) {
       )
     }
   }
+
+  const mapStateToProps = state => {
+    return {
+      ...state
+    }
+  };
+
+  return connect(mapStateToProps)(Auth)
 }
