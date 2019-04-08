@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 
 import { withAuth } from './../Auth'
 import { CustomTable } from './../CustomTable'
@@ -15,13 +15,11 @@ export class Main extends Component {
 
   render() {
     return (
-      <main>
-      <Switch>
+      <BrowserRouter>
         <Route exact path='/' component={withAuth(CustomTable)}/>
         <Route path='/user/:number' component={withAuth(Matches)}/>
         <Route path='/login' component={Login}/>
-      </Switch>
-    </main>
+      </BrowserRouter>
     )
   }
 }

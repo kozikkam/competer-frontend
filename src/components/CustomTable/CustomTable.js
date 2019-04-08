@@ -18,7 +18,7 @@ function createData(userId, firstName, lastName, elo, matchCount, winCount, winP
   return { id, userId, firstName, lastName, elo, matchCount, winCount, winPercentage }
 }
 
-class CustomTableComponent extends Component {
+export class CustomTableComponent extends Component {
   constructor(props) {
     super(props)
 
@@ -91,9 +91,4 @@ class CustomTableComponent extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  ...ownProps,
-  jwt: state.jwt,
-})
-
-export const CustomTable = connect(mapStateToProps)(CustomTableComponent)
+export const CustomTable = connect()(CustomTableComponent)

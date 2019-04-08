@@ -15,7 +15,7 @@ export const checkJWT = () => {
       }
     ).then((response) => {
       if (response.status === 200) {
-        return dispatch(checkJWTSuccess)
+        return dispatch(checkJWTSuccess())
       }
       return dispatch(checkJWTFailure())
     })
@@ -29,14 +29,8 @@ export const checkJWTBegin = () => ({
 
 export const checkJWTSuccess = () => ({
   type: CHECK_JWT_SUCCESS,
-  payload: {
-    valid: true,
-  },
 })
 
 export const checkJWTFailure = () => ({
   type: CHECK_JWT_FAILURE,
-  payload: {
-    valid: false,
-  }
 })

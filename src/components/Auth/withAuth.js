@@ -6,16 +6,13 @@ import { checkJWT } from './../../redux/actions/jwt'
 
 export function withAuth(ComponentToProtect) {
   class Auth extends Component {
-    componentDidMount() {
+    componentWillMount() {
       this.props.dispatch(checkJWT())
     }
 
     render() {
-      const { loading, valid } = this.props
-      if (loading) {
-        return null
-      }
-      if (!valid) {
+      const { authenticated } = this.props
+      if (!authenticated) {
         return <Redirect to="/login" />
       }
       return (
@@ -28,7 +25,8 @@ export function withAuth(ComponentToProtect) {
 
   const mapStateToProps = state => {
     return {
-      ...state
+      authenticated: state.authenticated,
+      loading: state.loading,
     }
   };
 

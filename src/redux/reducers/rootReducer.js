@@ -9,20 +9,16 @@ export default (state, action) => {
     case CHECK_JWT_BEGIN:
       return {
         ...state,
-        loading: true,
-        valid: false,
       }
     case CHECK_JWT_SUCCESS:
       return {
         ...state,
-        loading: false,
-        valid: true,
+        authenticated: true,
       }
     case CHECK_JWT_FAILURE:
       return {
         ...state,
-        loading: false,
-        valid: false,
+        authenticated: false,
       }
     default:
       return state
