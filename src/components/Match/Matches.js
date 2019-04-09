@@ -18,16 +18,20 @@ export class Matches extends Component {
   }
 
   async componentDidMount() {
-    const jwt = sessionStorage.getItem(process.env.REACT_APP_JWT_STORE_KEY)
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_DOMAIN}/user/${this.number}`, {
-        headers: {
-          'Authorization': `Bearer ${jwt}`,
-        },
-      }
-    )
-    const data = await response.json()
-    this.setState({ data, isLoading: false })
+    try {
+      const jwt = sessionStorage.getItem(process.env.REACT_APP_JWT_STORE_KEY)
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_DOMAIN}/user/${this.number}`, {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+          },
+        }
+      )
+      const data = await response.json()
+      this.setState({ data, isLoading: false })
+    } catch (err) {
+      this.setState({ error: 'Something went wrong' })
+    }
   }
 
   getEloHistory(data) {
@@ -39,6 +43,10 @@ export class Matches extends Component {
 
   render() {
     const { data, isLoading } = this.state
+    if (this.state.error) {
+      return (<p>{this.state.error}</p>)
+    }
+
     if (isLoading) {
       return (
         <CircularProgress color='secondary' />

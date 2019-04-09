@@ -30,20 +30,28 @@ export class CustomTableComponent extends Component {
 
   async componentDidMount() {
     const jwt = sessionStorage.getItem(process.env.REACT_APP_JWT_STORE_KEY)
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_DOMAIN}/user`, {
-        headers: {
-          'Authorization': `Bearer ${jwt}`,
-        },
-      }
-    )
-    const data = await response.json()
-    const transformedData = data.map(row => createData(...Object.values(row)))
-    this.setState({ data: transformedData, isLoading: false })
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_DOMAIN}/user`, {
+          headers: {
+            'Authorization': `Bearer ${jwt}`,
+          },
+        }
+      )
+      const data = await response.json()
+      const transformedData = data.map(row => createData(...Object.values(row)))
+      this.setState({ data: transformedData, isLoading: false })
+    } catch (err) {
+      this.setState({ error: 'Something went wrong' })
+    }
   }
 
   render() {
     const { data, isLoading } = this.state
+    if (this.state.error) {
+      return (<p>{this.state.error}</p>)
+    }
+
     if (isLoading) {
       return (
         <Paper className="table">
