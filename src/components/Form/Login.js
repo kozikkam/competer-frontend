@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography'
 import { Snackbar } from './../Snackbar'
 
 import './Login.css'
+import { checkJWTSuccess } from '../../redux/actions/jwt';
 
 class LoginComponent extends Component {
   constructor(props) {
@@ -54,8 +55,8 @@ class LoginComponent extends Component {
     }
 
     if (response.status === 200) {
-      sessionStorage.setItem('jwtToken', body.token)
-      this.props.dispatch({ type: 'addJWT', payload: body.token })
+      sessionStorage.setItem(process.env.REACT_APP_JWT_STORE_KEY, body.token)
+      this.props.dispatch(checkJWTSuccess())
       this.setState({ redirect: true })
     } else {
       this.setState({

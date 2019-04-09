@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import { checkJWT } from './../../redux/actions/jwt'
+import { checkToken } from './../../redux/actions/jwt'
 
 export function withAuth(ComponentToProtect) {
   class Auth extends Component {
     componentWillMount() {
-      this.props.dispatch(checkJWT())
+      const jwt = sessionStorage.getItem(process.env.REACT_APP_JWT_STORE_KEY)
+      this.props.dispatch(checkToken(jwt))
     }
 
     render() {
@@ -26,7 +27,6 @@ export function withAuth(ComponentToProtect) {
   const mapStateToProps = state => {
     return {
       authenticated: state.authenticated,
-      loading: state.loading,
     }
   };
 

@@ -29,7 +29,7 @@ export class CustomTableComponent extends Component {
   }
 
   async componentDidMount() {
-    const jwt = sessionStorage.getItem('jwtToken')
+    const jwt = sessionStorage.getItem(process.env.REACT_APP_JWT_STORE_KEY)
     const response = await fetch(
       `${process.env.REACT_APP_BACKEND_DOMAIN}/user`, {
         headers: {
