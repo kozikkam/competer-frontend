@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { Match } from './Match'
 import { Info } from './../Info'
+import { SimpleAreaChart } from './../Chart'
 
 export class Matches extends Component {
   constructor(props) {
@@ -29,22 +30,34 @@ export class Matches extends Component {
     this.setState({ data, isLoading: false })
   }
 
+  getEloHistory(data) {
+    return data.participants.map(participant => ({
+      name: participant.match.date,
+      value: participant.previousElo,
+    })).reverse()
+  }
+
   render() {
     const { data, isLoading } = this.state
     if (isLoading) {
       return (
-        <CircularProgress color="secondary" />
+        <CircularProgress color='secondary' />
       )
     }
 
     return (
-      <div className="matches">
+      <div className='matches'>
         <Grid container>
           <Grid item xs={1} />
           <Grid item xs={10}>
-            <Info attributes={{firstName: data.firstName, lastName: data.lastName, elo: data.elo}}/>
+            <Info attributes={{ firstName: data.firstName, lastName: data.lastName, elo: data.elo }}/>
           </Grid>
           <Grid item xs={1} />
+          <Grid item xs={4} />
+          <Grid item xs={4}>
+            <SimpleAreaChart data={this.getEloHistory(data)}/>
+          </Grid>
+          <Grid item xs={4} />
         </Grid>
         {data.participants.map((participant, i) => {
           return <Match key={i} data={participant} />
