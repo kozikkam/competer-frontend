@@ -17,9 +17,7 @@ export function withAuth(ComponentToProtect) {
         return <Redirect to="/login" />
       }
       return (
-        <React.Fragment>
-          <ComponentToProtect {...this.props} />
-        </React.Fragment>
+        <ComponentToProtect {...this.props} />
       )
     }
   }
