@@ -3,9 +3,9 @@ Frontend for [competer](https://github.com/kozikkam/competer). Built with React,
 ## Setup
 
 - clone this repository
-- `npm i`
-- `npm run start`
+- `yarn`
+- `yarn run start`
 
 ## Running tests
 
-- `npm run test`
+- `yarn run test`
