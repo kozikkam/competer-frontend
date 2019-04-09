@@ -33,7 +33,7 @@ export class Matches extends Component {
   getEloHistory(data) {
     return data.participants.map(participant => ({
       name: participant.match.date,
-      value: participant.previousElo,
+      elo: participant.previousElo,
     })).reverse()
   }
 
@@ -55,7 +55,7 @@ export class Matches extends Component {
           <Grid item xs={1} />
           <Grid item xs={4} />
           <Grid item xs={4}>
-            <SimpleAreaChart data={this.getEloHistory(data)}/>
+            <SimpleAreaChart data={this.getEloHistory(data)} valueName={'elo'}/>
           </Grid>
           <Grid item xs={4} />
         </Grid>
