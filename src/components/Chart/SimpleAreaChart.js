@@ -13,7 +13,7 @@ export class SimpleAreaChart extends PureComponent {
           <XAxis dataKey='name'/>
           <YAxis type='number' domain={['dataMin - 100', 'dataMax + 100']}/>
           <Tooltip/>
-          <Area type='monotone' dataKey={this.props.valueName || 'value'} stroke='#8884d8' fill='#8884d8' />
+          <Area type='monotone' dataKey={this.props.valueName || 'value'} stroke='gray' fill='gray' />
         </AreaChart>
       </ResponsiveContainer>
     )
