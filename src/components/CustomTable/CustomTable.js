@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Table from '@material-ui/core/Table'
 import Paper from '@material-ui/core/Paper'
+import { Link as RouterLink } from 'react-router-dom'
 
 import './CustomTable.css'
 
@@ -46,6 +47,10 @@ export class CustomTableComponent extends Component {
     }
   }
 
+  generateLink(userId) {
+    return props => <RouterLink to={`/user/${userId}`} {...props} />
+  }
+
   render() {
     const { data, isLoading } = this.state
     if (this.state.error) {
@@ -82,13 +87,13 @@ export class CustomTableComponent extends Component {
           <TableBody>
             {data.map(row => {
               return (
-                <TableRow key={row.id} className="table-row" component="a" href={`/user/${row.userId}`}>
-                <TableCell component="th" scope="row" align="right">{row.id}</TableCell>
-                <TableCell>{row.firstName}</TableCell>
-                <TableCell>{row.lastName}</TableCell>
-                <TableCell align="right">{row.elo}</TableCell>
-                <TableCell align="right">{row.matchCount}</TableCell>
-                <TableCell align="right">{row.winPercentage}%</TableCell>
+                <TableRow key={row.id} className="table-row" onClick={() => window.location=`/user/${row.userId}`}>
+                  <TableCell scope="row" align="right">{row.id}</TableCell>
+                  <TableCell>{row.firstName}</TableCell>
+                  <TableCell>{row.lastName}</TableCell>
+                  <TableCell align="right">{row.elo}</TableCell>
+                  <TableCell align="right">{row.matchCount}</TableCell>
+                  <TableCell align="right">{row.winPercentage}%</TableCell>
                 </TableRow>
               )
             })}
