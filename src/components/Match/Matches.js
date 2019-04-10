@@ -54,23 +54,19 @@ export class Matches extends Component {
     }
 
     return (
-      <div className='matches'>
+      <React.Fragment>
         <Grid container>
-          <Grid item xs={1} />
-          <Grid item xs={10}>
+          <Grid item xs={12}>
             <Info attributes={{ firstName: data.firstName, lastName: data.lastName, elo: data.elo }}/>
           </Grid>
-          <Grid item xs={1} />
-          <Grid item xs={4} />
-          <Grid item xs={4}>
+          <Grid item xs={12} style={{ height: 400, marginBottom: 40 }}>
             <SimpleAreaChart data={this.getEloHistory(data)} valueName={'elo'}/>
           </Grid>
-          <Grid item xs={4} />
         </Grid>
         {data.participants.map((participant, i) => {
           return <Match key={i} data={participant} />
         })}
-      </div>
+      </React.Fragment>
     )
   }
 }

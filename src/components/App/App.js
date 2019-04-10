@@ -15,10 +15,12 @@ export class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <CssBaseline />
         <Header />
-        <Main />
+        <div className='container'>
+          <Main/>
+        </div>
       </div>
     )
   }

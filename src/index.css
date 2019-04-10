@@ -14,3 +14,17 @@ a {
 .root {
   height: 100% !important;
 }
+
+.container {
+  width: auto;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+@media (min-width: 1148px) {
+  .container {
+    width: 1148px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

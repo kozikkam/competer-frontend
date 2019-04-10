@@ -31,18 +31,16 @@ export class Match extends Component {
       <div className="single-match">
         <div className="teams">
           <Grid container>
-            <Grid item xs={1} />
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <Team players={this.getWinners(data)} />
             </Grid>
             <Grid item xs={2} className="elo-change">
               <span style={{ fontSize: "0.25em", fontWeight: "bold" }}>{formattedDate}</span>
               <span style={{ color: data.winner ? 'green' : 'red' }}>{ data.eloChange > 0 ? `+${data.eloChange}`: data.eloChange }</span>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={5}>
               <Team players={this.getLosers(data)} />
             </Grid>
-            <Grid item xs={1} />
           </Grid>
         </div>
         
