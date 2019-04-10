@@ -37,7 +37,7 @@ export class Matches extends Component {
   getEloHistory(data) {
     return data.participants.map(participant => ({
       name: participant.match.date.split('T')[0],
-      elo: participant.previousElo,
+      elo: participant.newElo,
     })).reverse()
   }
 
