@@ -21,6 +21,7 @@ class LoginComponent extends Component {
     this.state = {
       email : '',
       password: '',
+      remember: false,
       error: null,
       redirect: false,
     }
@@ -28,8 +29,14 @@ class LoginComponent extends Component {
 
   handleInputChange(event) {
     const { value, name } = event.target
+    let castedValue = value
+    
+    if (event.target.type === 'checkbox') {
+      castedValue = !!event.target.checked
+    }
+
     this.setState({
-      [name]: value
+      [name]: castedValue
     })
   }
 
@@ -39,9 +46,18 @@ class LoginComponent extends Component {
     let body
 
     try {
+      console.log(JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        remember: this.state.remember,
+      }));
       response = await fetch(`${process.env.REACT_APP_BACKEND_DOMAIN}/login`, {
         method: 'POST',
-        body: JSON.stringify({ email: this.state.email, password: this.state.password }),
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+          remember: this.state.remember,
+        }),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -105,7 +121,7 @@ class LoginComponent extends Component {
               <Input name="password" type="password" id="password" autoComplete="current-password" onChange={this.handleInputChange.bind(this)} />
             </FormControl>
             <FormControlLabel
-              control={<Checkbox value="remember" color="default" />}
+              control={<Checkbox name="remember" color="default" onChange={this.handleInputChange.bind(this)} />}
               label="Remember me"
             />
             <Button
