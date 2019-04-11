@@ -5,6 +5,9 @@ import Grid from '@material-ui/core/Grid'
 import { Match } from './Match'
 import { Info } from './../Info'
 import { SimpleAreaChart } from './../Chart'
+import { LoadMore } from './../Load'
+
+import './Matches.css'
 
 export class Matches extends Component {
   constructor(props) {
@@ -41,6 +44,15 @@ export class Matches extends Component {
     })).reverse()
   }
 
+  loadFunction(data, page) {
+    if (!data) {
+      return (<React.Fragment></React.Fragment>)
+    }
+    return data.participants.map((participant, i) => {
+      return <div className='fade-in'><Match key={i} data={participant} /></div>
+    })
+  }
+
   render() {
     const { data, isLoading } = this.state
     if (this.state.error) {
@@ -63,9 +75,7 @@ export class Matches extends Component {
             <SimpleAreaChart data={this.getEloHistory(data)} valueName={'elo'}/>
           </Grid>
         </Grid>
-        {data.participants.map((participant, i) => {
-          return <Match key={i} data={participant} />
-        })}
+        <LoadMore mapper={this.loadFunction} href={`${process.env.REACT_APP_BACKEND_DOMAIN}/user/${this.number}`} visiblePerClick={10}/>
       </React.Fragment>
     )
   }
